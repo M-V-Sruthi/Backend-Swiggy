@@ -9,6 +9,7 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
+app.use(cors())
 const PORT = process.env.PORT || 4000;
 dotEnv.config();
 
