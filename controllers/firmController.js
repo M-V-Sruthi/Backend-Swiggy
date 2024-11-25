@@ -25,7 +25,9 @@ const addFirm = async(req, res) => {
         if (!vendor) {
             res.status(404).json({ message: "Vendor not found" })
         }
-
+        if(vendor.firm.length > 0){
+            return res.status(400).json({message:"vendor can have only one firm"});
+        }
         
 
         const firm = new Firm({
@@ -39,9 +41,11 @@ const addFirm = async(req, res) => {
         })
        // here
         const savedFirm = await firm.save();
+        const firmId = savedFirm._id
         vendor.firm.push(savedFirm)
         await vendor.save()// here by using savedfirm , we are pushing details to vendor table
-        return res.status(200).json({ message: 'Firm Added successfully '});
+       
+        return res.status(200).json({ message: 'Firm Added successfully ', firmId });
 
 
     } catch (error) {
