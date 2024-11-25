@@ -59,11 +59,12 @@ const vendorLogin = async(req, res) => {
 
 const getAllVendors = async(req, res) => {
     try {
+       
         const vendors = await Vendor.find().populate('firm');
         res.json({ vendors })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error12" });
     }
 }
 
